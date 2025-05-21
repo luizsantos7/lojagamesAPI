@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -29,6 +30,12 @@ public class Categoria {
 	@Pattern(regexp = "^[^0-9].*", message = "O atributo nao pode ser apenas numérico")
     @Column(length = 60)
 	private String categoria;
+	
+	@NotBlank(message = "O nome da categoria é obrigatório")
+    @Size(min = 3, max = 255, message = "O nome deve ter entre 3 e 255 caracteres")
+	@Pattern(regexp = "^[^0-9].*", message = "O atributo nao pode ser apenas numérico")
+    @Column(length = 255)
+	private String descricao;
 	
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.REMOVE)
